@@ -47,3 +47,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-storage'
 }
+
+apply plugin: 'com.google.gms.google-services'
