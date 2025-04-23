@@ -1,80 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-
-    <TextView
-        android:id="@+id/loginTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MealMate Login"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+    android:padding="24dp">
 
     <EditText
-        android:id="@+id/emailInput"
-        android:layout_width="256dp"
-        android:layout_height="67dp"
-        android:layout_below="@+id/loginTitle"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
-        android:layout_marginEnd="67dp"
-        android:layout_marginBottom="500dp"
-        android:ems="10"
+        android:id="@+id/emailLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Email"
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="250dp"
-        android:layout_height="68dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="413dp"
-        android:ems="10"
-        android:hint="Passowrd"
-        android:inputType="textPassword" />
+        android:id="@+id/passwordLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_below="@id/emailLogin"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="305dp"
-        android:layout_height="65dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="297dp"
-        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Login"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#6ECB72"/>
+        android:layout_below="@id/passwordLogin"
+        android:layout_marginTop="20dp" />
 
     <TextView
-        android:id="@+id/signUp"
-        android:layout_width="341dp"
-        android:layout_height="43dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="236dp"
-        android:text="New Here! Sign UP"
-        android:textColor="#3F51B5"
-        android:textAlignment="center"
-        />
+        android:id="@+id/signupLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account? Sign Up"
 
-
-
+        android:layout_below="@id/loginButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
 </RelativeLayout>

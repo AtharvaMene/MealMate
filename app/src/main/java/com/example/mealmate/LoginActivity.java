@@ -1,24 +1,59 @@
 package com.example.mealmate;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
+
+    EditText emailLogin, passwordLogin;
+    Button loginButton;
+    TextView signupLink;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        emailLogin = findViewById(R.id.emailLogin);
+        passwordLogin = findViewById(R.id.passwordLogin);
+        loginButton = findViewById(R.id.loginButton);
+        signupLink = findViewById(R.id.signupLink);
+        mAuth = FirebaseAuth.getInstance();
+
+        loginButton.setOnClickListener(v -> {
+            String email = emailLogin.getText().toString().trim();
+            String password = passwordLogin.getText().toString().trim();
+
+            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(this, MainActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+        });
+
+        signupLink.setOnClickListener(v -> {
+            startActivity(new Intent(this, SignupActivity.class));
+            finish();
         });
     }
 }
