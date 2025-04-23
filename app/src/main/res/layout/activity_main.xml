@@ -59,7 +59,22 @@
         android:layout_marginBottom="297dp"
         android:padding="10dp"
         android:text="Login"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#6ECB72"/>
+
+    <TextView
+        android:id="@+id/signUp"
+        android:layout_width="341dp"
+        android:layout_height="43dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="236dp"
+        android:text="New Here! Sign UP"
+        android:textColor="#3F51B5"
+        android:textAlignment="center"
+        />
+
 
 
 </RelativeLayout>
