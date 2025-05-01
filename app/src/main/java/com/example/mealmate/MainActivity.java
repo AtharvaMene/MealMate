@@ -1,5 +1,6 @@
 package com.example.mealmate;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -149,8 +150,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.nav_home).setOnClickListener(view ->
                 Toast.makeText(MainActivity.this, "Home clicked", Toast.LENGTH_SHORT).show());
 
-
         findViewById(R.id.nav_profile).setOnClickListener(view ->
-                Toast.makeText(MainActivity.this, "Profile clicked", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(MainActivity.this, EditProfileActivity.class))); // Close the parenthesis here
+
+        findViewById(R.id.nav_history).setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+        });
     }
 }

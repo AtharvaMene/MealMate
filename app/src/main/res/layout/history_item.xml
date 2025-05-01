@@ -4,34 +4,32 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="12dp"
-    android:background="@drawable/item_background"
-    android:layout_marginBottom="8dp"
-    android:elevation="2dp">
+    android:background="@drawable/history_item_background"
+    android:layout_marginVertical="6dp">
 
     <TextView
-        android:id="@+id/textViewMealType"
+        android:id="@+id/dateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meal: Breakfast"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:text="DateTime"
+        android:textSize="16sp"
         android:textColor="#000000" />
 
     <TextView
-        android:id="@+id/textViewDate"
+        android:id="@+id/mealType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date: 2025-05-01"
-        android:textSize="14sp"
-        android:textColor="#555555"
-        android:layout_marginTop="4dp"/>
+        android:text="Meal Type"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginTop="4dp" />
 
     <TextView
-        android:id="@+id/textViewTime"
+        android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time: 08:30 AM"
-        android:textSize="14sp"
+        android:text="Status"
+        android:textSize="16sp"
         android:textColor="#555555"
-        android:layout_marginTop="2dp"/>
+        android:layout_marginTop="4dp" />
 </LinearLayout>

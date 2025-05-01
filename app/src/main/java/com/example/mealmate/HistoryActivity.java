@@ -1,49 +1,75 @@
 package com.example.mealmate;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mealmate.adapters.MealAdapter;
+import com.example.mealmate.model.MealHistory;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.*;
-import com.example.mealmate.R;
-import com.example.mealmate.adapters.HistoryAdapter;
-import com.example.mealmate.model.MealHistory;
-import java.util.*;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
-    private RecyclerView historyRecyclerView;
-    private List<MealHistory> historyList = new ArrayList<>();
-    private HistoryAdapter adapter;
+
+    private RecyclerView recyclerView;
+    private MealAdapter adapter;
+    private List<MealHistory> historyList;
+
+    private FirebaseUser user;
+    private DatabaseReference historyRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        historyRecyclerView = findViewById(R.id.historyRecyclerView);
-        adapter = new HistoryAdapter(historyList);
-        historyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        historyRecyclerView.setAdapter(adapter);
+        recyclerView = findViewById(R.id.historyRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("meal_history").child(user.getUid());
+        historyList = new ArrayList<>();
+        adapter = new MealAdapter(historyList);
+        recyclerView.setAdapter(adapter);
 
-        ref.addValueEventListener(new ValueEventListener() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            historyRef = FirebaseDatabase.getInstance().getReference("history").child(user.getUid());
+            loadHistory();
+        } else {
+            Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    private void loadHistory() {
+        historyRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(DataSnapshot snapshot) {
                 historyList.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    MealHistory entry = ds.getValue(MealHistory.class);
-                    historyList.add(entry);
+                for (DataSnapshot entry : snapshot.getChildren()) {
+                    MealHistory history = entry.getValue(MealHistory.class);
+                    if (history != null) {
+                        historyList.add(history);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(HistoryActivity.this, "Failed to load history.", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Edit Profile Image -->
+    <ImageView
+        android:id="@+id/editProfileImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:contentDescription="Profile Image"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Change Profile Image Button -->
+    <Button
+        android:id="@+id/changeImageBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Profile Image"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Edit Name -->
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="389dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        android:hint="Enter your name"
+        android:textSize="16sp" />
+
+    <!-- Save Changes Button -->
+    <Button
+        android:id="@+id/saveChangesBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Changes"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>

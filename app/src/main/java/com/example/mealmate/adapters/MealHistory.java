@@ -1,4 +1,4 @@
-package com.example.mealmate.model;
+package com.example.mealmate.adapters;
 
 public class MealHistory {
     private String dateTime;
