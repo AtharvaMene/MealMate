@@ -29,8 +29,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="98dp"
-        android:layout_marginEnd="67dp"
-        android:layout_marginBottom="484dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="481dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress" />
@@ -42,7 +42,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="82dp"
         android:layout_marginBottom="394dp"
         android:ems="10"
         android:hint="Passowrd"
@@ -56,22 +56,23 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="297dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="293dp"
+        android:backgroundTint="#6ECB72"
         android:padding="10dp"
+
         android:text="Login"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#6ECB72"/>
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/signupLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="109dp"
+        android:layout_marginEnd="119dp"
         android:layout_marginBottom="260dp"
         android:text="Not Yet Registered? Sign up" />
 

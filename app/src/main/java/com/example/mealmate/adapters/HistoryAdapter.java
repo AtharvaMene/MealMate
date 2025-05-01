@@ -22,9 +22,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         public ViewHolder(View view) {
             super(view);
-            mealType = view.findViewById(R.id.tvMealType);
-            dateTime = view.findViewById(R.id.tvDateTime);
-            status = view.findViewById(R.id.tvStatus);
+//            mealType = view.findViewById(R.id.tvMealType);
+//            dateTime = view.findViewById(R.id.tvDateTime);
+//            status = view.findViewById(R.id.tvStatus);
         }
     }
 

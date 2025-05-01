@@ -1,4 +1,4 @@
-package com.yourapp.mealmate.activities;
+package com.example.mealmate;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
-import com.yourapp.mealmate.R;
-import com.yourapp.mealmate.adapters.HistoryAdapter;
-import com.yourapp.mealmate.model.MealHistory;
+import com.example.mealmate.R;
+import com.example.mealmate.adapters.HistoryAdapter;
+import com.example.mealmate.model.MealHistory;
 import java.util.*;
 
 public class HistoryActivity extends AppCompatActivity {

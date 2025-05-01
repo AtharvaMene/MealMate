@@ -1,5 +1,6 @@
 package com.example.mealmate;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,10 +25,11 @@ import java.util.HashMap;
 public class SignupActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText fullName, email, password, confirmPassword;
+    private EditText fullName, collegeId, email, password, confirmPassword;
     private Button signUpButton;
     private TextView loginLink;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,7 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         fullName = findViewById(R.id.fullName);
+        collegeId = findViewById(R.id.collegeId);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         confirmPassword = findViewById(R.id.confirmPassword);
@@ -50,12 +53,14 @@ public class SignupActivity extends AppCompatActivity {
 
         signUpButton.setOnClickListener(view -> {
             String userName = fullName.getText().toString().trim();
+            String userCollegeId = collegeId.getText().toString().trim();
             String userEmail = email.getText().toString().trim();
             String userPassword = password.getText().toString().trim();
             String confirmPass = confirmPassword.getText().toString().trim();
 
-            if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(userEmail) ||
-                    TextUtils.isEmpty(userPassword) || TextUtils.isEmpty(confirmPass)) {
+            if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(userCollegeId) ||
+                    TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(userPassword) ||
+                    TextUtils.isEmpty(confirmPass)) {
                 Toast.makeText(this, "All fields are mandatory!", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -70,10 +75,11 @@ public class SignupActivity extends AppCompatActivity {
                     FirebaseUser firebaseUser = mAuth.getCurrentUser();
                     String uid = firebaseUser.getUid();
 
-                    // Save name and meal balance to Firebase Realtime Database
+                    // Save user data to Firebase Realtime Database
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
                     HashMap<String, Object> userMap = new HashMap<>();
                     userMap.put("name", userName);
+                    userMap.put("collegeId", userCollegeId);
                     userMap.put("email", userEmail);
                     userMap.put("mealsRemaining", 30); // Default meal count
 

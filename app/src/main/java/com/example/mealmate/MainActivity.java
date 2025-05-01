@@ -28,6 +28,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvWelcomeMessage, tvMealBalance, tvSelectedMeal;
+
+    private TextView nav_history;
     private Spinner spinnerMealOptions;
     private Button btnGenerateQR;
     private ImageView ivQRCode;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private String selectedMeal = "";
     private String userName = "";
     private String userId = "";
+
+    private String userCollegeId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         btnGenerateQR = findViewById(R.id.btn_generate_qr);
         ivQRCode = findViewById(R.id.iv_qr_code);
 
+        nav_history = findViewById(R.id.nav_history);
+
     }
 
     private void fetchUserData() {
@@ -72,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     userName = snapshot.child("name").getValue(String.class);
+                    userCollegeId = snapshot.child("collegeId").getValue(String.class);
+
                     Long mealsRemaining = snapshot.child("mealsRemaining").getValue(Long.class);
 
                     tvWelcomeMessage.setText("👤 Welcome, " + userName);
@@ -113,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupListeners() {
         btnGenerateQR.setOnClickListener(view -> {
-            if (userName.isEmpty() || userId.isEmpty()) {
+            if (userName.isEmpty() || userCollegeId.isEmpty()) {
                 Toast.makeText(this, "User data not loaded yet", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -123,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            String qrData = "Name: " + userName + "\nUID: " + userId + "\nMeal: " + selectedMeal;
+            String qrData = "Name: " + userName + "\nCollege ID: " + userCollegeId + "\nMeal: " + selectedMeal;
 
             try {
                 BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
@@ -136,12 +144,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void setupBottomNavigation() {
         findViewById(R.id.nav_home).setOnClickListener(view ->
                 Toast.makeText(MainActivity.this, "Home clicked", Toast.LENGTH_SHORT).show());
 
-        findViewById(R.id.nav_history).setOnClickListener(view ->
-                Toast.makeText(MainActivity.this, "History clicked", Toast.LENGTH_SHORT).show());
 
         findViewById(R.id.nav_profile).setOnClickListener(view ->
                 Toast.makeText(MainActivity.this, "Profile clicked", Toast.LENGTH_SHORT).show());
