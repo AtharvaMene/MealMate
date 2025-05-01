@@ -1,16 +1,26 @@
-package com.example.mealmate; // replace with your package name
+package com.example.mealmate;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
@@ -19,20 +29,24 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvWelcomeMessage, tvMealBalance, tvSelectedMeal;
     private Spinner spinnerMealOptions;
-    private Button btnViewMenu, btnGenerateQR;
+    private Button btnGenerateQR;
     private ImageView ivQRCode;
-    private RelativeLayout layoutQRContainer;
+
 
     private String selectedMeal = "";
+    private String userName = "";
+    private String userId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); // This should be your XML layout name
+        setContentView(R.layout.activity_main);
 
         initViews();
+        fetchUserData();
         setupSpinner();
         setupListeners();
+        setupBottomNavigation();
     }
 
     private void initViews() {
@@ -40,10 +54,36 @@ public class MainActivity extends AppCompatActivity {
         tvMealBalance = findViewById(R.id.tv_meal_balance);
         tvSelectedMeal = findViewById(R.id.tv_selected_meal);
         spinnerMealOptions = findViewById(R.id.spinner_meal_options);
-        btnViewMenu = findViewById(R.id.btn_view_menu);
+
         btnGenerateQR = findViewById(R.id.btn_generate_qr);
         ivQRCode = findViewById(R.id.iv_qr_code);
-        layoutQRContainer = findViewById(R.id.layout_qr_container);
+
+    }
+
+    private void fetchUserData() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+
+        userId = user.getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    userName = snapshot.child("name").getValue(String.class);
+                    Long mealsRemaining = snapshot.child("mealsRemaining").getValue(Long.class);
+
+                    tvWelcomeMessage.setText("👤 Welcome, " + userName);
+                    tvMealBalance.setText("🍽️ Meals Remaining: " + (mealsRemaining != null ? mealsRemaining : 0));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Failed to fetch user data", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setupSpinner() {
@@ -62,44 +102,48 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     tvSelectedMeal.setText("Selected: None");
                     btnGenerateQR.setEnabled(false);
-                    ivQRCode.setImageDrawable(null); // Clear previous QR if any
+                    ivQRCode.setImageDrawable(null);
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // No action needed
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 
     private void setupListeners() {
-        btnViewMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: Open today's menu (you can create a new activity later)
+        btnGenerateQR.setOnClickListener(view -> {
+            if (userName.isEmpty() || userId.isEmpty()) {
+                Toast.makeText(this, "User data not loaded yet", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
 
-        btnGenerateQR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                generateQRCode(selectedMeal);
+            if (selectedMeal.isEmpty() || selectedMeal.equals("Select Meal")) {
+                Toast.makeText(this, "Please select a valid meal", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String qrData = "Name: " + userName + "\nUID: " + userId + "\nMeal: " + selectedMeal;
+
+            try {
+                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                Bitmap bitmap = barcodeEncoder.encodeBitmap(qrData, BarcodeFormat.QR_CODE, 400, 400);
+                ivQRCode.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "QR Generation Error", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void generateQRCode(String data) {
-        if (data.isEmpty() || data.equals("Select Meal")) {
-            return;
-        }
+    private void setupBottomNavigation() {
+        findViewById(R.id.nav_home).setOnClickListener(view ->
+                Toast.makeText(MainActivity.this, "Home clicked", Toast.LENGTH_SHORT).show());
 
-        try {
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            android.graphics.Bitmap bitmap = barcodeEncoder.encodeBitmap(data, BarcodeFormat.QR_CODE, 400, 400);
-            ivQRCode.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
+        findViewById(R.id.nav_history).setOnClickListener(view ->
+                Toast.makeText(MainActivity.this, "History clicked", Toast.LENGTH_SHORT).show());
+
+        findViewById(R.id.nav_profile).setOnClickListener(view ->
+                Toast.makeText(MainActivity.this, "Profile clicked", Toast.LENGTH_SHORT).show());
     }
 }

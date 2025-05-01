@@ -15,6 +15,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -35,7 +40,6 @@ public class SignupActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Bind UI
         fullName = findViewById(R.id.fullName);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -44,7 +48,6 @@ public class SignupActivity extends AppCompatActivity {
         loginLink = findViewById(R.id.loginLink);
         mAuth = FirebaseAuth.getInstance();
 
-        // Sign Up button click
         signUpButton.setOnClickListener(view -> {
             String userName = fullName.getText().toString().trim();
             String userEmail = email.getText().toString().trim();
@@ -64,16 +67,32 @@ public class SignupActivity extends AppCompatActivity {
 
             mAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(this, LoginActivity.class));
-                    finish();
+                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                    String uid = firebaseUser.getUid();
+
+                    // Save name and meal balance to Firebase Realtime Database
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+                    HashMap<String, Object> userMap = new HashMap<>();
+                    userMap.put("name", userName);
+                    userMap.put("email", userEmail);
+                    userMap.put("mealsRemaining", 30); // Default meal count
+
+                    reference.child(uid).setValue(userMap).addOnCompleteListener(dbTask -> {
+                        if (dbTask.isSuccessful()) {
+                            Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(this, LoginActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Database Error: " + dbTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 } else {
                     Toast.makeText(this, "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         });
 
-        // Already have account - go to login
         loginLink.setOnClickListener(view -> {
             startActivity(new Intent(SignupActivity.this, LoginActivity.class));
             finish();
