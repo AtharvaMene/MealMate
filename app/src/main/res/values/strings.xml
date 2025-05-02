@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MealMate</string>
+    <string name="date_time"><![CDATA[Date & Time]]></string>
 </resources>

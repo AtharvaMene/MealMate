@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mealmate.model.MealHistory;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvWelcomeMessage, tvMealBalance, tvSelectedMeal;
 
-    private TextView nav_history;
+
     private Spinner spinnerMealOptions;
     private Button btnGenerateQR;
     private ImageView ivQRCode;
@@ -53,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         setupListeners();
         setupBottomNavigation();
     }
-
     private void initViews() {
         tvWelcomeMessage = findViewById(R.id.tv_welcome_message);
         tvMealBalance = findViewById(R.id.tv_meal_balance);
@@ -63,10 +63,8 @@ public class MainActivity extends AppCompatActivity {
         btnGenerateQR = findViewById(R.id.btn_generate_qr);
         ivQRCode = findViewById(R.id.iv_qr_code);
 
-        nav_history = findViewById(R.id.nav_history);
 
     }
-
     private void fetchUserData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) return;
@@ -141,6 +139,25 @@ public class MainActivity extends AppCompatActivity {
             } catch (WriterException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "QR Generation Error", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // 🔽 SAVE MEAL HISTORY IN FIREBASE 🔽
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                String userId = user.getUid();
+                String timestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(new java.util.Date());
+
+                MealHistory mealHistory = new MealHistory(timestamp, selectedMeal, "Generated");
+
+                DatabaseReference historyRef = FirebaseDatabase.getInstance()
+                        .getReference("MealHistory")
+                        .child(userId)
+                        .push();
+
+                historyRef.setValue(mealHistory)
+                        .addOnSuccessListener(unused -> Toast.makeText(this, "Meal history saved", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(this, "Failed to save meal history", Toast.LENGTH_SHORT).show());
             }
         });
     }
@@ -151,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Home clicked", Toast.LENGTH_SHORT).show());
 
         findViewById(R.id.nav_profile).setOnClickListener(view ->
-                startActivity(new Intent(MainActivity.this, EditProfileActivity.class))); // Close the parenthesis here
+                startActivity(new Intent(MainActivity.this, EditProfileActivity.class)));
 
         findViewById(R.id.nav_history).setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, HistoryActivity.class));

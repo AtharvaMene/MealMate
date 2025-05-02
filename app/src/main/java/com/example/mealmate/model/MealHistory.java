@@ -5,7 +5,9 @@ public class MealHistory {
     private String mealType;
     private String status;
 
-    public MealHistory() {}
+    public MealHistory() {
+        // Default constructor required for Firebase
+    }
 
     public MealHistory(String dateTime, String mealType, String status) {
         this.dateTime = dateTime;
@@ -13,15 +15,11 @@ public class MealHistory {
         this.status = status;
     }
 
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public String getMealType() {
-        return mealType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
+    // Add getters and setters
+    public String getDateTime() { return dateTime; }
+    public void setDateTime(String dateTime) { this.dateTime = dateTime; }
+    public String getMealType() { return mealType; }
+    public void setMealType(String mealType) { this.mealType = mealType; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
