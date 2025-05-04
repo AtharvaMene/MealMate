@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reportLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:id="@+id/centerLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/reportTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meal Report"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingBottom="24dp" />
+
+        <TextView
+            android:id="@+id/totalMealsText"
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="Total Meals: "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/breakfastCountText"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="Breakfast: "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lunchCountText"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="Lunch: "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/dinnerCountText"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="Dinner: "
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnGenerateReport"
+            android:layout_width="245dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="32dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:text="Generate Report" />
+    </LinearLayout>
+
+</RelativeLayout>

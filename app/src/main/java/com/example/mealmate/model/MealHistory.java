@@ -6,7 +6,7 @@ public class MealHistory {
     private String status;
 
     public MealHistory() {
-        // Default constructor required for Firebase
+
     }
 
     public MealHistory(String dateTime, String mealType, String status) {

@@ -1,4 +1,24 @@
+<string-array name="language_options">
+    <item>English</item>
+    <item>हिन्दी</item>
+    <item>मराठी</item>
+</string-array>
+
+    <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MealMate</string>
-    <string name="date_time"><![CDATA[Date & Time]]></string>
+
+<string name="app_name">Meal Mate</string>
+<string name="welcome_user">👤 Welcome, User</string>
+<string name="meal_balance">🍽️ Meal Balance: 10</string>
+<string name="selected_none">Selected: None</string>
+<string name="view_menu">View Today\'s Menu</string>
+<string name="generate_qr">Generate QR Code</string>
+<string name="your_qr_code">Your QR Code</string>
+<string name="qr_instructions">Show this QR code at the cafeteria counter</string>
+<string name="home">Home</string>
+<string name="report">Report</string>
+<string name="history">History</string>
+<string name="select_meal">Select Meal</string>
+<string name="profile">Profile</string>
+
 </resources>

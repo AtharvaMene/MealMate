@@ -1,0 +1,15 @@
+<resources>
+    <string name="welcome_user">👤 स्वागत है, उपयोगकर्ता</string>
+    <string name="meal_balance">🍽️ भोजन शेष: 10</string>
+    <string name="selected_none">चयनित: कोई नहीं</string>
+    <string name="view_menu">आज का मेनू देखें</string>
+    <string name="generate_qr">QR कोड बनाएं</string>
+    <string name="your_qr_code">आपका QR कोड</string>
+    <string name="qr_instructions">इस QR कोड को कैंटीन काउंटर पर दिखाएं</string>
+    <string name="home">होम</string>
+    <string name="report">रिपोर्ट</string>
+    <string name="history">इतिहास</string>
+    <string name="profile">प्रोफ़ाइल</string>
+    <string name="select_meal">भोजन का चयन करें</string>
+    <string name="app_name">MealMate</string>
+</resources>

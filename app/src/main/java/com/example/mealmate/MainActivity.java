@@ -167,6 +167,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.nav_home).setOnClickListener(view ->
                 Toast.makeText(MainActivity.this, "Home clicked", Toast.LENGTH_SHORT).show());
 
+        findViewById(R.id.nav_report).setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, ReportActivity.class));
+        });
+
         findViewById(R.id.nav_profile).setOnClickListener(view ->
                 startActivity(new Intent(MainActivity.this, EditProfileActivity.class)));
 

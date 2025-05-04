@@ -11,7 +11,7 @@
         android:id="@+id/tv_app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meal Dashboard"
+        android:text="@string/app_name"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="#212121"
@@ -44,7 +44,7 @@
             android:id="@+id/tv_meal_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🍽️ Meal Balance: 10"
+            android:text="@string/meal_balance"
             android:textSize="14sp"
             android:textColor="#757575"
             android:layout_below="@id/tv_welcome_message"
@@ -56,7 +56,7 @@
         android:id="@+id/tv_meal_selection_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Your Meal"
+        android:text="@string/select_meal"
         android:textSize="20sp"
         android:textColor="#212121"
         android:fontFamily="sans-serif-medium"
@@ -101,7 +101,7 @@
         android:id="@+id/btn_generate_qr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Generate QR Code"
+        android:text="@string/generate_qr"
         android:textAllCaps="false"
         app:cornerRadius="16dp"
         android:layout_below="@id/btn_view_menu"
@@ -197,13 +197,13 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_menu" />
+                android:src="@drawable/ic_report" />
 
             <TextView
-                android:id="@+id/nav_menu"
+                android:id="@+id/nav_report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Menu"
+                android:text="Report"
                 android:textSize="12sp"
                 android:textColor="#212121"/>
         </LinearLayout>
@@ -224,7 +224,7 @@
                 android:id="@+id/nav_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="History"
+                android:text="@string/history"
                 android:textSize="12sp"
                 android:textColor="#212121"/>
         </LinearLayout>
@@ -245,7 +245,7 @@
                 android:id="@+id/nav_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profile"
+                android:text="@string/profile"
                 android:textSize="12sp"
                 android:textColor="#212121"/>
         </LinearLayout>
