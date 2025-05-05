@@ -1,6 +1,6 @@
 package com.example.mealmate;
 
-import android.content.Intent;
+ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
