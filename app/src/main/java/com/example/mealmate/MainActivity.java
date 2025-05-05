@@ -30,17 +30,13 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvWelcomeMessage, tvMealBalance, tvSelectedMeal;
-
-
     private Spinner spinnerMealOptions;
-    private Button btnGenerateQR;
+    private Button btnGenerateQR, btnViewMenu;
     private ImageView ivQRCode;
-
 
     private String selectedMeal = "";
     private String userName = "";
     private String userId = "";
-
     private String userCollegeId = "";
 
     @Override
@@ -54,17 +50,17 @@ public class MainActivity extends AppCompatActivity {
         setupListeners();
         setupBottomNavigation();
     }
+
     private void initViews() {
         tvWelcomeMessage = findViewById(R.id.tv_welcome_message);
         tvMealBalance = findViewById(R.id.tv_meal_balance);
         tvSelectedMeal = findViewById(R.id.tv_selected_meal);
         spinnerMealOptions = findViewById(R.id.spinner_meal_options);
-
         btnGenerateQR = findViewById(R.id.btn_generate_qr);
         ivQRCode = findViewById(R.id.iv_qr_code);
-
-
+        btnViewMenu = findViewById(R.id.btn_view_menu); // view menu button
     }
+
     private void fetchUserData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) return;
@@ -142,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            // 🔽 SAVE MEAL HISTORY IN FIREBASE 🔽
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 String userId = user.getUid();
@@ -160,8 +155,12 @@ public class MainActivity extends AppCompatActivity {
                         .addOnFailureListener(e -> Toast.makeText(this, "Failed to save meal history", Toast.LENGTH_SHORT).show());
             }
         });
-    }
 
+        btnViewMenu.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+            startActivity(intent);
+        });
+    }
 
     private void setupBottomNavigation() {
         findViewById(R.id.nav_home).setOnClickListener(view ->

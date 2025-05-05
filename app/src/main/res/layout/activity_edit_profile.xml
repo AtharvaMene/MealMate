@@ -1,42 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Edit Profile Image -->
-    <ImageView
-        android:id="@+id/editProfileImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:contentDescription="Profile Image"
-        android:layout_marginTop="20dp"/>
-
-    <!-- Change Profile Image Button -->
-    <Button
-        android:id="@+id/changeImageBtn"
+    <!-- Profile Name -->
+    <TextView
+        android:id="@+id/profileNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change Profile Image"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
-
-    <!-- Edit Name -->
-    <EditText
-        android:id="@+id/editName"
-        android:layout_width="389dp"
-        android:layout_height="63dp"
+        android:text="Name"
+        android:textSize="20sp"
         android:layout_marginTop="20dp"
-        android:hint="Enter your name"
-        android:textSize="16sp" />
+        android:layout_centerHorizontal="true" />
 
-    <!-- Save Changes Button -->
+    <EditText
+        android:id="@+id/updateName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your name"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/profileNameLabel" />
+
+    <!-- Profile Email -->
+    <TextView
+        android:id="@+id/profileEmailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/updateName" />
+
+    <EditText
+        android:id="@+id/updateEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your email"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/profileEmailLabel" />
+
+    <!-- Save Button -->
     <Button
-        android:id="@+id/saveChangesBtn"
+        android:id="@+id/saveUpdatesBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save Changes"
-        android:layout_marginTop="20dp"/>
-</LinearLayout>
+        android:backgroundTint="#03DAC5"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/updateEmail" />
+
+    <!-- Cancel Button -->
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:backgroundTint="#FF4081"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/saveUpdatesBtn" />
+
+</RelativeLayout>

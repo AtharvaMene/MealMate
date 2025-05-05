@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <resources>
-    <string-array name="language_options" />
+
+    <string-array name="language_options">
+        <item>English</item>
+        <item>हिन्दी</item>
+        <item>मराठी</item>
+    </string-array>
+
 </resources>

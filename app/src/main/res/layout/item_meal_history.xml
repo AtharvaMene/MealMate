@@ -20,7 +20,7 @@
         android:id="@+id/tv_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/date_time"
+        android:text="datetime"
         android:textColor="#666"
         android:textSize="14sp"/>
 

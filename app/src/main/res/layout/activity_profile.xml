@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:padding="16dp">
 
     <!-- Profile Image -->
@@ -11,9 +9,8 @@
         android:id="@+id/profileImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-
-        android:layout_gravity="center"
-        android:contentDescription="Profile Image"/>
+        android:layout_centerHorizontal="true"
+        android:contentDescription="Profile Image" />
 
     <!-- Profile Name -->
     <TextView
@@ -23,7 +20,8 @@
         android:text="Name"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
-        android:layout_gravity="center"/>
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/profileImage" />
 
     <!-- Profile Email -->
     <TextView
@@ -33,7 +31,8 @@
         android:text="Email"
         android:textSize="16sp"
         android:layout_marginTop="10dp"
-        android:layout_gravity="center"/>
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/profileName" />
 
     <!-- Edit Profile Button -->
     <Button
@@ -41,8 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Edit Profile"
-        app:backgroundTint="#03DAC5"
-        android:layout_marginTop="20dp"/>
+        android:backgroundTint="#03DAC5"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/profileEmail" />
 
     <!-- Logout Button -->
     <Button
@@ -50,6 +50,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Logout"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/editProfileBtn" />
 
-</LinearLayout>
+    <!-- Contact Section -->
+    <TextView
+        android:id="@+id/contactInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact us at: support@mealmate.com"
+        android:textSize="14sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/logoutBtn" />
+
+    <!-- Feedback Section -->
+    <TextView
+        android:id="@+id/feedbackInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Give us feedback!"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/contactInfo" />
+
+</RelativeLayout>

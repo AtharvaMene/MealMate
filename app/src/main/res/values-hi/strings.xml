@@ -1,15 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">मील मेट</string>
     <string name="welcome_user">👤 स्वागत है, उपयोगकर्ता</string>
     <string name="meal_balance">🍽️ भोजन शेष: 10</string>
-    <string name="selected_none">चयनित: कोई नहीं</string>
+    <string name="selected_none">चयनित: कुछ नहीं</string>
     <string name="view_menu">आज का मेनू देखें</string>
-    <string name="generate_qr">QR कोड बनाएं</string>
-    <string name="your_qr_code">आपका QR कोड</string>
-    <string name="qr_instructions">इस QR कोड को कैंटीन काउंटर पर दिखाएं</string>
+    <string name="generate_qr">क्यूआर कोड जनरेट करें</string>
+    <string name="your_qr_code">आपका क्यूआर कोड</string>
+    <string name="qr_instructions">इस क्यूआर कोड को कैफेटेरिया काउंटर पर दिखाएं</string>
     <string name="home">होम</string>
     <string name="report">रिपोर्ट</string>
     <string name="history">इतिहास</string>
-    <string name="profile">प्रोफ़ाइल</string>
-    <string name="select_meal">भोजन का चयन करें</string>
-    <string name="app_name">MealMate</string>
+    <string name="select_meal">भोजन चुनें</string>
+    <string name="profile">प्रोफाइल</string>
 </resources>
